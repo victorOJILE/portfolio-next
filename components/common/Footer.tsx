@@ -28,13 +28,12 @@ export default function Footer() {
     <footer className="bg-dark-300 border-t border-gray-700">
       <div className="container-custom py-8">
         {/* Activity Indicator */}
-        <div className="fixed bottom-2 left-2 text-gray-400 text-2xl animate-pulse-slow no-print">
+        <div className="fixed bottom-2 left-2 text-gray-400 text-2xl animate-pulse-slow no-print" title="I'm Active">
           <svg
             className="w-6 h-6"
             fill="currentColor"
             viewBox="0 0 640 512"
             aria-label="Active status"
-            title="I'm Active"
           >
             <path d="M216 288h-48c-8.84 0-16 7.16-16 16v192c0 8.84 7.16 16 16 16h48c8.84 0 16-7.16 16-16V304c0-8.84-7.16-16-16-16zM88 384H40c-8.84 0-16 7.16-16 16v96c0 8.84 7.16 16 16 16h48c8.84 0 16-7.16 16-16v-96c0-8.84-7.16-16-16-16zm256-192h-48c-8.84 0-16 7.16-16 16v288c0 8.84 7.16 16 16 16h48c8.84 0 16-7.16 16-16V208c0-8.84-7.16-16-16-16zm128-96h-48c-8.84 0-16 7.16-16 16v384c0 8.84 7.16 16 16 16h48c8.84 0 16-7.16 16-16V112c0-8.84-7.16-16-16-16zM600 0h-48c-8.84 0-16 7.16-16 16v480c0 8.84 7.16 16 16 16h48c8.84 0 16-7.16 16-16V16c0-8.84-7.16-16-16-16z" />
           </svg>
