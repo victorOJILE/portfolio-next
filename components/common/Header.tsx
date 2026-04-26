@@ -1,0 +1,133 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const navLinks = [
+  { href: '/', label: 'HOME' },
+  { href: '#projects', label: 'PROJECTS' },
+  { href: '#about', label: 'ABOUT ME' },
+  { href: '#skills', label: 'SKILLS' },
+  { href: '#contact', label: 'CONTACT' },
+];
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(menuOpen => !menuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-dark-300/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}
+    >
+      <nav className="container-custom">
+        <div className="flex items-center justify-between py-4 border-b border-gray-700">
+          {/* Logo */}
+          <Link href="/" className="relative w-48 h-12 transition-transform hover:scale-105">
+            <Image
+              src="/images/website_logo.png"
+              alt="Victor Ojile Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-sm lg:text-base font-bold text-gray-300 hover:text-white transition-colors duration-200 link-hover"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden p-2 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-primary-500"
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            <div className="w-8 flex flex-col justify-between h-6">
+              <span
+                className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${
+                  isMenuOpen ? 'rotate-45 translate-y-[11px] bg-red-500' : ''
+                }`}
+              />
+              <span
+                className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${
+                  isMenuOpen ? 'opacity-0' : ''
+                }`}
+              />
+              <span
+                className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${
+                  isMenuOpen ? '-rotate-45 -translate-y-[11px] bg-red-500' : ''
+                }`}
+              />
+            </div>
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              id="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden bg-dark-300/95 backdrop-blur-md"
+            >
+              <ul className="py-4 space-y-2">
+                {navLinks.map((link) => (
+                  <motion.li
+                    key={link.href}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={closeMenu}
+                      className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </header>
+  );
+}
