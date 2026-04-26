@@ -19,7 +19,7 @@ export default function AboutSection() {
       aria-labelledby="about-heading"
     >
       <div className="container-custom">
-        <div className="max-w-4xl mx-auto pt-24 md:pt-32">
+        <div className="max-w-4xl mx-auto pt-20 md:pt-24">
           {/* Section Heading */}
           <motion.header
             initial={{ opacity: 0, y: 20 }}

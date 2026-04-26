@@ -26,13 +26,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="glass-card overflow-hidden group"
-    >
+    <div className="glass-card overflow-hidden group">
       {/* Project Image */}
       <div className="relative h-64 md:h-72 overflow-hidden">
         <Image
@@ -78,14 +72,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         )}
 
         {/* Links */}
-        <div className="flex gap-3 pt-4 border-t border-gray-700">
+        <div className="flex items-center gap-3 pt-4 border-t border-gray-700">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => handleLinkClick(project.githubUrl!, 'GitHub')}
-              className="px-2 text-white"
+              className="px-2 text-white text-lg"
             >
               <FaGithub />
             </a>
@@ -107,7 +101,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

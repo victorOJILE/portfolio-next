@@ -198,7 +198,7 @@ export default function ContactSection() {
             </div>
 
             {/* Status Messages */}
-            {status.type !== 'idle' && (
+            {status.type !== 'idle' && status.type !== 'loading' && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
