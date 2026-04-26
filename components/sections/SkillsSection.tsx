@@ -11,7 +11,7 @@ import {
   SiNodedotjs,
   SiExpress,
   SiFirebase,
-  SiMongod,
+  SiMongodb,
   SiTailwindcss,
   SiGit
 } from 'react-icons/si';
