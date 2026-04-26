@@ -81,7 +81,7 @@
   }
   
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-24 md:py-32;
   }
   
   /* Background Patterns */
@@ -90,7 +90,6 @@
       url('/images/nature-2608274_1283.jpg'),
       repeating-linear-gradient(136deg, #150505 48px, #2E2E42 50px);
     background-size: cover;
-    background-attachment: fixed;
   }
   
   .bg-dark-pattern {

@@ -19,24 +19,6 @@ export default function AboutSection() {
       aria-labelledby="about-heading"
     >
       <div className="container-custom">
-        {/* Profile Image - Positioned absolutely at top */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.5 }}
-          className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2"
-        >
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-[25%_5%] overflow-hidden border-4 border-gray-300 shadow-xl bg-white">
-            <Image
-              src="/images/victor-ojile.jpg"
-              alt="Victor Ojile - Web Developer"
-              width={160}
-              height={160}
-              className="object-cover w-full h-full"
-            />
-          </div>
-        </motion.div>
-
         <div className="max-w-4xl mx-auto pt-24 md:pt-32">
           {/* Section Heading */}
           <motion.header
@@ -47,14 +29,20 @@ export default function AboutSection() {
           >
             <h2 className="section-heading text-dark-200">About Me</h2>
           </motion.header>
-
+          {/* Profile Image - Positioned absolutely at top */}
+          <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-[25%_5%] overflow-hidden border-4 border-gray-300 shadow-xl bg-white">
+              <Image
+                src="/images/victor-ojile.jpg"
+                alt="Victor Ojile - Web Developer"
+                width={160}
+                height={160}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
           {/* About Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="prose prose-lg max-w-none"
-          >
+          <div className="prose prose-lg max-w-none">
             <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
               Hello! I'm <strong className="text-primary-600">Victor Ojile</strong>, a passionate 
               full-stack web developer with rich experience in creating beautiful, functional, and 
@@ -79,15 +67,10 @@ export default function AboutSection() {
               I am currently available for <strong className="text-accent-green">freelance projects</strong> and 
               <strong className="text-accent-green"> full-time roles</strong> focused on modern web technologies.
             </p>
-          </motion.div>
+          </div>
 
           {/* Download CV Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <a
               href="/static/victor_ojile_cv.pdf"
               download="victor_ojile_resume"
@@ -98,7 +81,7 @@ export default function AboutSection() {
               <FaDownload className="text-2xl" />
               <strong>Download CV</strong>
             </a>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

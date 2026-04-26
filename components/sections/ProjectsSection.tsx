@@ -79,6 +79,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         {/* Links */}
         <div className="flex gap-3 pt-4 border-t border-gray-700">
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => handleLinkClick(project.githubUrl!, 'GitHub')}
+              className="px-2 text-white"
+            >
+              <FaGithub />
+            </a>
+          )}
           {project.liveUrl && (
             <a
               href={project.liveUrl}
@@ -90,19 +101,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               }}
               className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded transition-colors text-sm font-medium"
             >
-              <FaExternalLinkAlt />
               <span>View</span>
-            </a>
-          )}
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => handleLinkClick(project.githubUrl!, 'GitHub')}
-              className="px-4 py-2 text-white rounded transition-colors text-sm font-medium"
-            >
-              <FaGithub />
+              <FaExternalLinkAlt />
             </a>
           )}
         </div>
