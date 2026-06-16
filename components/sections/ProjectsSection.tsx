@@ -110,7 +110,7 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
       ref={sectionRef}
       id="projects"
       className="section-padding bg-dark-300"
-      aria-labelledby="projects-heading"></section>
+      aria-labelledby="projects-heading">
       <div className="container-custom">
         {/* Section Heading */}
         <header className={"text-center mb-16 fade-in-up" + (isVisible ? " visible" : "")}>
