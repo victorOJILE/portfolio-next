@@ -7,8 +7,9 @@ export function useScrollVisibility(ref: RefObject<HTMLElement>): boolean {
     const element = ref.current;
     if (!element) return;
     
-    if(!!IntersectionObserver) {
-      setIsVisible(true); return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
     }
 
     const observer = new IntersectionObserver(

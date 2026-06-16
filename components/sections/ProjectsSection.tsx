@@ -50,8 +50,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-sm bg-primary-600/20 text-primary-300 rounded-full border border-primary-500/30"
-              >
+                className="px-3 py-1 text-sm bg-primary-600/20 text-primary-300 rounded-full border border-primary-500/30">
                 {tech}
               </span>
             ))}
@@ -78,8 +77,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => handleLinkClick(project.githubUrl!, 'GitHub')}
-              className="text-white text-lg"
-            >
+              className="text-white text-lg">
               <FaGithub />
             </a>
           )}
@@ -92,8 +90,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 handleProjectClick();
                 handleLinkClick(project.liveUrl!, 'Live Demo');
               }}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded transition-colors text-sm font-medium"
-            >
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded transition-colors text-sm font-medium">
               <span>View</span>
               <FaExternalLinkAlt />
             </a>
@@ -113,8 +110,7 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
       ref={sectionRef}
       id="projects"
       className="section-padding bg-dark-300"
-      aria-labelledby="projects-heading"
-    >
+      aria-labelledby="projects-heading"></section>
       <div className="container-custom">
         {/* Section Heading */}
         <header className={"text-center mb-16 fade-in-up" + (isVisible ? " visible" : "")}>

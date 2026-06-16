@@ -94,8 +94,7 @@ export default function ContactSection() {
       ref={sectionRef}
       id="contact"
       className="section-padding bg-dark-300 bg-pattern"
-      aria-labelledby="contact-heading"
-    >
+      aria-labelledby="contact-heading">
       <div className="container-custom max-w-4xl">
         {/* Section Heading */}
         <header className={"text-center mb-12 fade-in-up" + (isVisible ? " visible" : "")}>
@@ -189,8 +188,7 @@ export default function ContactSection() {
                     : status.type === 'error'
                     ? 'bg-red-500/20 border border-red-500/50 text-red-300'
                     : 'bg-blue-500/20 border border-blue-500/50 text-blue-300'
-                }`}
-              >
+                }`}>
                 {status.type === 'success' && <FaCheckCircle className="text-2xl" />}
                 {status.type === 'error' && <FaExclamationTriangle className="text-2xl" />}
                 <span>{status.message}</span>
@@ -201,8 +199,7 @@ export default function ContactSection() {
             <button
               type="submit"
               disabled={status.type === 'loading'}
-              className="btn-primary w-full md:w-auto min-w-[200px] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+              className="btn-primary w-full md:w-auto min-w-[200px] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed">
               {status.type === 'loading' ? (
                 <>
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

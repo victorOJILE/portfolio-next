@@ -15,8 +15,7 @@ export default function AboutSection() {
       ref={sectionRef}
       id="about"
       className="section-padding bg-gray-50 relative"
-      aria-labelledby="about-heading"
-    >
+      aria-labelledby="about-heading">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto pt-20 md:pt-24">
           {/* Section Heading */}
@@ -46,8 +45,7 @@ export default function AboutSection() {
             <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
               I specialize in modern web technologies including <strong>React</strong>, <strong>Next.js</strong>, 
               and <strong>TypeScript</strong> for building responsive and performant user interfaces. 
-              On the backend, I work extensively with <strong>Node.js</strong>, <strong>Express</strong>, 
-              and <strong>Firebase</strong> to create scalable and secure server-side solutions.
+              On the backend, I work extensively with <strong>Node.js</strong>, <strong>Express</strong>, <strong>Firebase</strong>, and <strong>MongoDB</strong> to create scalable and secure server-side solutions.
             </p>
 
             <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
@@ -70,8 +68,7 @@ export default function AboutSection() {
               download="victor_ojile_resume"
               onClick={trackDownloadCV}
               className="btn-primary inline-flex items-center gap-3"
-              aria-label="Download Victor Ojile's full CV"
-            >
+              aria-label="Download Victor Ojile's full CV">
               <FaDownload className="text-2xl" />
               <strong>Download CV</strong>
             </a>

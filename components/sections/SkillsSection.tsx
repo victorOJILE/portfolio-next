@@ -88,8 +88,7 @@ export default function SkillsSection() {
       ref={sectionRef}
       id="skills"
       className="section-padding bg-dark-pattern"
-      aria-labelledby="skills-heading"
-    >
+      aria-labelledby="skills-heading">
       <div className="container-custom">
         {/* Section Heading */}
         <header className={"text-center mb-16 fade-in-up" + (isVisible ? " visible" : "")}>
