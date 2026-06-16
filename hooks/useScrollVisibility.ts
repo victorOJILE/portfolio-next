@@ -1,45 +1,29 @@
 import { useState, useEffect, RefObject } from 'react';
 
-interface UseScrollVisibilityOptions {
-  threshold?: number;
-  rootMargin?: string;
-  triggerOnce?: boolean;
-}
-
-export function useScrollVisibility(
-  ref: RefObject<HTMLElement>,
-  options: UseScrollVisibilityOptions = {}
-): boolean {
-  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
+export function useScrollVisibility(ref: RefObject<HTMLElement>): boolean {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+    
+    if(!!IntersectionObserver) {
+      setIsVisible(true); return;
+    }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      function([entry]) {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (triggerOnce) {
-            observer.disconnect();
-          }
-        } else if (!triggerOnce) {
-          setIsVisible(false);
+          observer.disconnect();
         }
-      },
-      {
-        threshold,
-        rootMargin,
-      }
+      }, { threshold: 0.1, rootMargin: '50px' }
     );
 
     observer.observe(element);
 
-    return () => {
-      observer.disconnect();
-    };
-  }, [ref, threshold, rootMargin, triggerOnce]);
+    return () => { observer.disconnect(); };
+  }, [ref]);
 
   return isVisible;
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaDownload } from 'react-icons/fa';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
@@ -21,14 +20,9 @@ export default function AboutSection() {
       <div className="container-custom">
         <div className="max-w-4xl mx-auto pt-20 md:pt-24">
           {/* Section Heading */}
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-center mb-12"
-          >
+          <header className={"text-center mb-12 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
             <h2 className="section-heading text-dark-200">About Me</h2>
-          </motion.header>
+          </header>
           {/* Profile Image - Positioned absolutely at top */}
           <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-[25%_5%] overflow-hidden border-4 border-gray-300 shadow-xl bg-white">

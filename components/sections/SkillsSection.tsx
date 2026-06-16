@@ -92,14 +92,9 @@ export default function SkillsSection() {
     >
       <div className="container-custom">
         {/* Section Heading */}
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <header className={"text-center mb-16 fade-in-up" + (isVisible ? " visible" : "")}>
           <h2 className="section-heading">Technical Skills</h2>
-        </motion.header>
+        </header>
 
         {/* Skills Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

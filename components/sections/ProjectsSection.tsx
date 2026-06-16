@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaGithub, FaExternalLinkAlt, FaCheckCircle } from 'react-icons/fa';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
@@ -26,7 +25,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   };
 
   return (
-    <div className="glass-card overflow-hidden group">
+    <div ref={cardRef} className={"glass-card overflow-hidden group fade-in-up" + (isVisible ? " visible" : "")}>
       {/* Project Image */}
       <div className="relative h-64 md:h-72 overflow-hidden">
         <Image
@@ -72,14 +71,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         )}
 
         {/* Links */}
-        <div className="flex items-center gap-3 pt-4 border-t border-gray-700">
+        <div className="flex items-center gap-5 pt-4 border-t border-gray-700">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => handleLinkClick(project.githubUrl!, 'GitHub')}
-              className="px-2 text-white text-lg"
+              className="text-white text-lg"
             >
               <FaGithub />
             </a>
@@ -118,17 +117,12 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
     >
       <div className="container-custom">
         {/* Section Heading */}
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <header className={"text-center mb-16 fade-in-up" + (isVisible ? " visible" : "")}>
           <h2 className="section-heading">Featured Projects</h2>
           <p className="text-gray-400 mt-4 text-lg">
             A selection of my best work showcasing diverse skills and technologies
           </p>
-        </motion.header>
+        </header>
 
         {/* Main Projects */}
         {mainProjects.length > 0 && (

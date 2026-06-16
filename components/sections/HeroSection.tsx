@@ -31,9 +31,6 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-2xl text-red-400 font-crimson mb-12"
           >
-            <span className="inline-block mr-2" aria-label="Thumbs up">
-              👍
-            </span>
             <strong>Quality, Security & Maintainability.</strong>
           </motion.p>
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useBackToTop } from '@/hooks/useBackToTop';
 
 const navLinks = [
   { href: '/', label: 'HOME' },
@@ -15,24 +16,7 @@ const navLinks = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(menuOpen => !menuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const { isVisible: isScrolled } = useBackToTop(50);
 
   return (
     <header
@@ -69,7 +53,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={toggleMenu}
+            onClick={() => setIsMenuOpen(menuOpen => !menuOpen)}
             className="md:hidden p-2 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-primary-500"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
@@ -116,7 +100,7 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
-                      onClick={closeMenu}
+                      onClick={() => setIsMenuOpen(false)}
                       className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
                     >
                       {link.label}

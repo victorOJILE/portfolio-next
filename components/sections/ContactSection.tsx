@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useState, FormEvent } from 'react';
-import { motion } from 'framer-motion';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
 import { trackContactFormSubmit } from '@/lib/firebase/analytics';
 import { FaPaperPlane, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
@@ -99,35 +98,20 @@ export default function ContactSection() {
     >
       <div className="container-custom max-w-4xl">
         {/* Section Heading */}
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
+        <header className={"text-center mb-12 fade-in-up" + (isVisible ? " visible" : "")}>
           <h2 className="section-heading">Contact Me</h2>
-        </motion.header>
+        </header>
 
         {/* Intro Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8"
-        >
+        <div className={"mb-8 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
           <p className="text-gray-300 text-lg md:text-xl font-crimson text-center">
             I am interested in freelance opportunities. However, if you have other requests or
             questions, don't hesitate to use the form.
           </p>
-        </motion.div>
+        </div>
 
         {/* Contact Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="glass-card p-6 md:p-8"
-        >
+        <div className={"glass-card p-6 md:p-8 fade-in-up transition-delay-400" + (isVisible ? " visible" : "")}>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               {/* Full Name */}
@@ -199,10 +183,7 @@ export default function ContactSection() {
 
             {/* Status Messages */}
             {status.type !== 'idle' && status.type !== 'loading' && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`p-4 rounded-lg flex items-center gap-3 ${
+              <div className={`p-4 rounded-lg flex items-center gap-3 ${
                   status.type === 'success'
                     ? 'bg-green-500/20 border border-green-500/50 text-green-300'
                     : status.type === 'error'
@@ -213,7 +194,7 @@ export default function ContactSection() {
                 {status.type === 'success' && <FaCheckCircle className="text-2xl" />}
                 {status.type === 'error' && <FaExclamationTriangle className="text-2xl" />}
                 <span>{status.message}</span>
-              </motion.div>
+              </div>
             )}
 
             {/* Submit Button */}
@@ -235,7 +216,7 @@ export default function ContactSection() {
               )}
             </button>
           </form>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
