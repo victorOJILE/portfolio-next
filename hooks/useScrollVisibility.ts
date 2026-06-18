@@ -8,7 +8,7 @@ const callbacks = new Map < Element,
 const observer =
  typeof IntersectionObserver !== 'undefined' ?
  new IntersectionObserver(
-  (entries) => {
+  (entries, obs) => {
    for (const entry of entries) {
     if (!entry.isIntersecting) continue;
     
@@ -18,7 +18,7 @@ const observer =
      callbacks.delete(entry.target);
     }
     
-    observer.unobserve(entry.target);
+    obs.unobserve(entry.target);
    }
   }, { threshold: 0.1, rootMargin: '50px' }
  ) :
