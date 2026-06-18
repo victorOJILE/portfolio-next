@@ -25,9 +25,9 @@ function ProjectCard({ project }: { project: Project; }) {
   };
 
   return (
-    <li ref={cardRef} className={"glass-card overflow-hidden group fade-in-up" + (isVisible ? " visible" : "")}>
+    <li className={"glass-card overflow-hidden group fade-in-up" + (isVisible ? " visible" : "")}>
       {/* Project Image */}
-      <div className="relative h-64 md:h-72 overflow-hidden">
+      <div ref={cardRef} className="relative h-64 md:h-72 overflow-hidden">
         <Image
           src={project.image || '/images/placeholder-project.jpg'}
           alt={project.title}
