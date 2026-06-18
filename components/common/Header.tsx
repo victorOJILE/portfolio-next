@@ -22,8 +22,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-dark-300/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}
-    >
+      }`}>
       <nav className="container-custom">
         <div className="flex items-center justify-between py-4 border-b border-gray-700">
           {/* Logo */}
@@ -43,8 +42,7 @@ export default function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm lg:text-base font-bold text-gray-300 hover:text-white transition-colors duration-200 link-hover"
-                >
+                  className="text-sm lg:text-base font-bold text-gray-300 hover:text-white transition-colors duration-200 link-hover">
                   {link.label}
                 </Link>
               </li>
@@ -54,12 +52,11 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(menuOpen => !menuOpen)}
-            className="md:hidden p-2 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="md:hidden p-2 border border-gray-600 rounded"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <div className="w-8 flex flex-col justify-between h-6">
+            aria-controls="mobile-menu">
+            <div className="w-6 flex flex-col justify-between h-4">
               <span
                 className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${
                   isMenuOpen ? 'rotate-45 translate-y-[11px] bg-red-500' : ''
@@ -88,21 +85,18 @@ export default function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-dark-300/95 backdrop-blur-md"
-            >
+              className="md:hidden overflow-hidden bg-dark-300/95 backdrop-blur-md">
               <ul className="py-4 space-y-2">
                 {navLinks.map((link) => (
                   <motion.li
                     key={link.href}
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                    transition={{ duration: 0.3 }}>
                     <Link
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
-                    >
+                      className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200">
                       {link.label}
                     </Link>
                   </motion.li>

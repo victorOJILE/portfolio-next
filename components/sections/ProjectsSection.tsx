@@ -12,7 +12,7 @@ interface ProjectsSectionProps {
   otherProjects: Project[];
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project }: { project: Project; }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isVisible = useScrollVisibility(cardRef);
 
@@ -25,7 +25,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   };
 
   return (
-    <div ref={cardRef} className={"glass-card overflow-hidden group fade-in-up" + (isVisible ? " visible" : "")}>
+    <li ref={cardRef} className={"glass-card overflow-hidden group fade-in-up" + (isVisible ? " visible" : "")}>
       {/* Project Image */}
       <div className="relative h-64 md:h-72 overflow-hidden">
         <Image
@@ -97,8 +97,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           )}
         </div>
       </div>
-    </div>
+    </li>
   );
+}
+
+function OtherProjectCard({ project }: { project: Project; }) {
+ 
+  return (
+    <li className="relative m-2 md:m-4">
+		  <a href={project.liveUrl }>
+		    <img alt={project.title} className="w-100 rounded-sm" src={project.image} />
+				<h5 className={`py-2 ${project.color} w-full font-bold text-center`} textContent={project.title} />
+			</a>
+		</li>
+ );
 }
 
 export default function ProjectsSection({ mainProjects, otherProjects }: ProjectsSectionProps) {
@@ -126,9 +138,9 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
             <h3 className="text-3xl font-beauty text-primary-400 mb-8 text-center md:text-left">
               Main Projects
             </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {mainProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
-            </div>
+            <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {mainProjects.map((project, index) => <ProjectCard key={project.id} project={project} />)}
+            </ul>
           </div>
         )}
 
@@ -138,10 +150,10 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
             <h3 className="text-3xl font-beauty text-secondary-400 mb-8 text-center md:text-left">
               Other Projects
             </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} />
+            <ul className="custom-scrollbar scrollbar">
+              {otherProjects.map((project, index) => <OtherProjectCard key={project.id} project={project} />
               )}
-            </div>
+            </ul>
           </div>
         )}
 

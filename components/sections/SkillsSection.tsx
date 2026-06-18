@@ -87,7 +87,7 @@ export default function SkillsSection() {
     <section
       ref={sectionRef}
       id="skills"
-      className="section-padding bg-dark-pattern"
+      className="section-padding bg-dark-300"
       aria-labelledby="skills-heading">
       <div className="container-custom">
         {/* Section Heading */}

@@ -5,11 +5,13 @@ export interface Project {
   id: string;
   title: string;
   image: string;
-  techStack: string[];
+  isPrivate?: boolean;
+  techStack?: string[];
   features?: string[];
   liveUrl?: string;
   githubUrl?: string;
   order: number;
+  color?: string;
 }
 
 export interface ProjectsData {
@@ -29,32 +31,24 @@ export async function getProjectsFromFirestore(): Promise<ProjectsData> {
     // Fetch both collections
     const [mainSnapshot, otherSnapshot] = await Promise.all([
       getDocs(query(mainProjectsRef)),
-      getDocs(query(otherProjectsRef)),
+      getDocs(query(otherProjectsRef))
     ]);
 
     const mainProjects = mainSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
+      id: doc.id, ...doc.data()
     })) as Project[];
 
     const otherProjects = otherSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
+      id: doc.id, ...doc.data()
     })) as Project[];
 
     // Sort by order field
     mainProjects.sort((a, b) => (a.order || 0) - (b.order || 0));
     otherProjects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
-    return {
-      mainProjects,
-      otherProjects,
-    };
+    return { mainProjects, otherProjects };
   } catch (error) {
     console.error('Error fetching projects from Firestore:', error);
-    return {
-      mainProjects: [],
-      otherProjects: [],
-    };
+    return { mainProjects: [], otherProjects: [] };
   }
 }

@@ -16,7 +16,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-beauty text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-red-50 text-shadow-glow mb-6">
+            className="font-beauty text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-red-50 text-gradient text-shadow-glow mb-6">
             CODING WITH PASSION,
             <br />
             CRAFTING WITH PURPOSE

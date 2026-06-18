@@ -1,30 +1,55 @@
 import { useState, useEffect, RefObject } from 'react';
 
-export function useScrollVisibility(ref: RefObject<HTMLElement>): boolean {
-  const [isVisible, setIsVisible] = useState(false);
+type VisibilityCallback = (visible: boolean) => void;
 
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
+const callbacks = new Map < Element,
+ VisibilityCallback > ();
+
+const observer =
+ typeof IntersectionObserver !== 'undefined' ?
+ new IntersectionObserver(
+  (entries) => {
+   for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
     
-    if (typeof IntersectionObserver === 'undefined') {
-      setIsVisible(true);
-      return;
+    const callback = callbacks.get(entry.target);
+    if (callback) {
+     callback(true);
+     callbacks.delete(entry.target);
     }
+    
+    observer.unobserve(entry.target);
+   }
+  }, { threshold: 0.1, rootMargin: '50px' }
+ ) :
+ null;
 
-    const observer = new IntersectionObserver(
-      function([entry]) {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      }, { threshold: 0.1, rootMargin: '50px' }
-    );
+function observe(element: Element, callback: VisibilityCallback) {
+ callbacks.set(element, callback);
+ observer!.observe(element);
+}
 
-    observer.observe(element);
+function unobserve(element: Element) {
+ callbacks.delete(element);
+ observer?.unobserve(element);
+}
 
-    return () => { observer.disconnect(); };
-  }, [ref]);
-
-  return isVisible;
+export function useScrollVisibility(ref: RefObject < HTMLElement > ): boolean {
+ const [isVisible, setIsVisible] = useState(false);
+ 
+ useEffect(() => {
+  const element = ref.current;
+  if (!element) return;
+  
+  if (!observer) {
+   setIsVisible(true);
+   return;
+  }
+  
+  observe(element, setIsVisible);
+  
+  return () => unobserve(element);
+ }, [ref]);
+ 
+ return isVisible;
 }

@@ -39,7 +39,7 @@ export default function AboutSection() {
             <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
               Hello! I'm <strong className="text-primary-600">Victor Ojile</strong>, a passionate 
               full-stack web developer with rich experience in creating beautiful, functional, and 
-              interactive web applications for businesses, especially large projects.
+              interactive web applications for businesses.
             </p>
 
             <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
@@ -64,7 +64,7 @@ export default function AboutSection() {
           {/* Download CV Button */}
           <div className="text-center">
             <a
-              href="/static/victor_ojile_cv.pdf"
+              href="/victor_ojile_cv.pdf"
               download="victor_ojile_resume"
               onClick={trackDownloadCV}
               className="btn-primary inline-flex items-center gap-3"
