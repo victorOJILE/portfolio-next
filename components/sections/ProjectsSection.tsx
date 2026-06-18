@@ -107,7 +107,7 @@ function OtherProjectCard({ project }: { project: Project; }) {
     <li className="relative m-2 md:m-4">
 		  <a href={project.liveUrl }>
 		    <img alt={project.title} className="w-100 rounded-sm" src={project.image} />
-				<h5 className={`py-2 ${project.color} w-full font-bold text-center`} textContent={project.title} />
+				<h5 className={`py-2 ${project.color} w-full font-bold text-center`}>{project.title}</h5>
 			</a>
 		</li>
  );
