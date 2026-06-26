@@ -2,14 +2,41 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import { FaGithub, FaExternalLinkAlt, FaCheckCircle } from 'react-icons/fa';
+import { FaGithub, FaLock, FaExternalLinkAlt, FaCheckCircle } from 'react-icons/fa';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
+import { useContactRequest } from '@/components/contexts/ContactRequestContext';
 import { Project } from '@/lib/firebase/projects';
 import { trackProjectView, trackExternalLink } from '@/lib/firebase/analytics';
 
 interface ProjectsSectionProps {
   mainProjects: Project[];
   otherProjects: Project[];
+}
+
+function RequestAccessButton({ projectTitle }: { projectTitle: string }) {
+  const { setContactRequest } = useContactRequest();
+
+  const handleRequestAccess = async () => {
+    const confirmed = window.confirm(
+      `Requesting access to ${projectTitle}?\n\n` +
+      `Please fill out the contact form below.\n` +
+      `Be sure to include your GitHub username so I can grant access.`
+    );
+  
+    if (confirmed) {
+      setContactRequest(
+        `Access request: ${projectTitle}`,
+        `Hi, I'd like to request access to "${projectTitle}".\n\nMy GitHub username: `
+      );
+      document.getElementById('message')?.focus();
+    }
+  };
+
+  return (
+    <button onClick={handleRequestAccess} className="text-white text-lg">
+      <FaLock />
+    </button>
+  );
 }
 
 function ProjectCard({ project }: { project: Project; }) {
@@ -71,7 +98,9 @@ function ProjectCard({ project }: { project: Project; }) {
 
         {/* Links */}
         <div className="flex items-center gap-5 pt-4 border-t border-gray-700">
-          {project.githubUrl && (
+          {project.isPrivate ? (
+            <RequestAccessButton projectTitle={project.title} />
+          ) : (
             <a
               href={project.githubUrl}
               target="_blank"
@@ -104,11 +133,18 @@ function ProjectCard({ project }: { project: Project; }) {
 function OtherProjectCard({ project }: { project: Project; }) {
  
   return (
-    <li className="relative m-2 md:m-4">
-		  <a href={project.liveUrl }>
-		    <img alt={project.title} className="w-100 rounded-sm" src={project.image} />
-				<h5 className={`py-2 ${project.color} w-full font-bold text-center`}>{project.title}</h5>
-			</a>
+    <li className="inline-block relative m-2 md:m-4">
+	    <div className="h-64 md:h-72 overflow-hidden">
+        <Image
+          src={project.image || '/images/placeholder-project.jpg'}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-300 via-dark-300/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+        <a className={`py-2 ${project.color} w-full font-bold text-white text-sm`} href={project.liveUrl} target = "_blank" rel = "noopener noreferrer">{project.title}</a>
+      </div>
 		</li>
  );
 }

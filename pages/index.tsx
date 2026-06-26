@@ -1,11 +1,12 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import HeroSection from '../components/sections/HeroSection';
-import AboutSection from '../components/sections/AboutSection';
-import SkillsSection from '../components/sections/SkillsSection';
-import ProjectsSection from '../components/sections/ProjectsSection';
-import ContactSection from '../components/sections/ContactSection';
-import { getProjectsFromFirestore, Project } from '../lib/firebase/projects';
+import HeroSection from '@/components/sections/HeroSection';
+import AboutSection from '@/components/sections/AboutSection';
+import SkillsSection from '@/components/sections/SkillsSection';
+import ProjectsSection from '@/components/sections/ProjectsSection';
+import ContactSection from '@/components/sections/ContactSection';
+import ContactRequestProvider from '@/components/contexts/ContactRequestContext'
+import { getProjectsFromFirestore, Project } from '@/lib/firebase/projects';
 
 interface HomePageProps {
   mainProjects: Project[];
@@ -47,10 +48,12 @@ export default function HomePage({ mainProjects, otherProjects }: HomePageProps)
       </Head>
 
       <HeroSection />
-      <ProjectsSection mainProjects={mainProjects} otherProjects={otherProjects} />
-      <AboutSection />
-      <SkillsSection />
-      <ContactSection />
+      <ContactRequestProvider>
+        <ProjectsSection mainProjects={mainProjects} otherProjects={otherProjects} />
+        <AboutSection />
+        <SkillsSection />
+        <ContactSection />
+      </ContactRequestProvider>
     </>
   );
 }

@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef, useState, FormEvent } from 'react';
+import { useRef, useState, useEffect, FormEvent } from 'react';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
+import { useContactRequest } from '@/components/contexts/ContactRequestContext';
 import { trackContactFormSubmit } from '@/lib/firebase/analytics';
 import { FaPaperPlane, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 
@@ -20,19 +21,30 @@ interface FormStatus {
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useScrollVisibility(sectionRef);
-
+  const { requestedSubject, requestedMessage } = useContactRequest();
+  
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
-    subject: '',
-    message: '',
+    subject: requestedSubject,
+    message: requestedMessage,
   });
 
   const [status, setStatus] = useState<FormStatus>({
     type: 'idle',
     message: '',
   });
-
+  
+  useEffect(() => {
+    if (requestedSubject || requestedMessage) {
+      setFormData((prev) => ({
+        ...prev,
+        subject: requestedSubject || prev.subject,
+        message: requestedMessage || prev.message
+      }));
+    }
+  }, [requestedSubject, requestedMessage]);
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -70,7 +82,7 @@ export default function ContactSection() {
           subject: '',
           message: '',
         });
-
+        
         // Clear success message after 5 seconds
         setTimeout(() => {
           setStatus({ type: 'idle', message: '' });
