@@ -77,7 +77,7 @@ function ProjectCard({ project }: { project: Project; }) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-sm bg-primary-600/20 text-primary-300 rounded-full border border-primary-500/30">
+                className="px-2 py-0.5 text-xs bg-primary-600/20 text-primary-300 rounded-full border border-primary-500/30">
                 {tech}
               </span>
             ))}

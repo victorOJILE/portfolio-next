@@ -16,12 +16,14 @@ const beauty = localFont({
   src: '../public/fonts/BBeauty-v5.02-648B6363D402E00678B7AAF1D252A5DC.ttf',
   variable: '--font-beauty',
   display: 'swap',
+  preload: false
 });
 
 const crimson = localFont({
   src: '../public/fonts/Crimson-Italic.ttf',
   variable: '--font-crimson',
   display: 'swap',
+  preload: false
 });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
