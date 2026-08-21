@@ -13,7 +13,7 @@ interface ProjectsSectionProps {
   otherProjects: Project[];
 }
 
-const bg = {
+const bg: Record<string, string> = {
  reddish: "#e54540AA",
  bluish: "#131A64AA",
  greenish: "#115725AA"
