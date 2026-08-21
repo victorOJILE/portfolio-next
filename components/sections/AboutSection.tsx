@@ -37,7 +37,7 @@ export default function AboutSection() {
           {/* About Content */}
           <div className="prose prose-lg">
             <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
-              Hello! This is <strong>Victor Ojile</strong>, a full-stack web developer, with 4+ years of practical experience,
+              Hello! I am <strong>Victor Ojile</strong>, a full-stack web developer, with 4+ years of practical experience,
               who turns complex problems into clean, fast web applications that businesses actually enjoy using.
             </p>
 

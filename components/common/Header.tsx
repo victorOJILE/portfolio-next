@@ -7,76 +7,69 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useBackToTop } from '@/hooks/useBackToTop';
 
 const navLinks = [
-  { href: '/', label: 'HOME' },
-  { href: '#projects', label: 'PROJECTS' },
-  { href: '#about', label: 'ABOUT ME' },
-  { href: '#skills', label: 'SKILLS' },
-  { href: '#contact', label: 'CONTACT' },
+ { href: '/', label: 'HOME' },
+ { href: '#projects', label: 'PROJECTS' },
+ { href: '#about', label: 'ABOUT ME' },
+ { href: '#skills', label: 'SKILLS' },
+ { href: '#contact', label: 'CONTACT' },
 ];
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isVisible: isScrolled } = useBackToTop(50);
+ const [isMenuOpen, setIsMenuOpen] = useState(false);
+ const { isVisible: isScrolled } = useBackToTop(50);
+ 
+ return (
+  <header
+   className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+   isScrolled ? 'bg-dark-300/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+   }`}>
+   <nav className="container-custom">
+    <div className="flex items-center justify-between py-4 border-b border-gray-700">
+     {/* Logo */}
+     <Link href="/" className="relative w-48 h-12 transition-transform hover:scale-110">
+      <Image
+       src="/images/website_logo.png"
+       alt="Victor Ojile Logo"
+       fill priority 
+       className="object-contain"
+      />
+     </Link>
 
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-dark-300/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}>
-      <nav className="container-custom">
-        <div className="flex items-center justify-between py-4 border-b border-gray-700">
-          {/* Logo */}
-          <Link href="/" className="relative w-48 h-12 transition-transform hover:scale-105">
-            <Image
-              src="/images/website_logo.png"
-              alt="Victor Ojile Logo"
-              fill
-              className="object-contain"
-              priority
-            />
-          </Link>
+     {/* Desktop Navigation */}
+     <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
+      {navLinks.map((link) => (
+      <li key={link.href}>
+       <Link
+        href={link.href}
+        className="text-sm lg:text-base font-bold text-gray-300 hover:text-white transition-colors duration-200 link-hover">
+        {link.label}
+       </Link>
+      </li>
+      ))}
+     </ul>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-sm lg:text-base font-bold text-gray-300 hover:text-white transition-colors duration-200 link-hover">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+     {/* Mobile Menu Button */}
+     <button
+      onClick={() => setIsMenuOpen(menuOpen => !menuOpen)}
+      className="md:hidden p-2 border border-gray-600 rounded"
+      aria-label="Toggle menu"
+      aria-expanded={isMenuOpen}
+      aria-controls="mobile-menu">
+      <div className="w-6 flex flex-col justify-between h-4">
+       <span
+        className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[11px] bg-red-500' : ''}`}
+       />
+       <span
+        className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}
+       />
+       <span
+        className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[11px] bg-red-500' : ''}`}
+       />
+      </div>
+     </button>
+    </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(menuOpen => !menuOpen)}
-            className="md:hidden p-2 border border-gray-600 rounded"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu">
-            <div className="w-6 flex flex-col justify-between h-4">
-              <span
-                className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${
-                  isMenuOpen ? 'rotate-45 translate-y-[11px] bg-red-500' : ''
-                }`}
-              />
-              <span
-                className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${
-                  isMenuOpen ? 'opacity-0' : ''
-                }`}
-              />
-              <span
-                className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${
-                  isMenuOpen ? '-rotate-45 -translate-y-[11px] bg-red-500' : ''
-                }`}
-              />
-            </div>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
+    {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -107,5 +100,5 @@ export default function Header() {
         </AnimatePresence>
       </nav>
     </header>
-  );
+ );
 }

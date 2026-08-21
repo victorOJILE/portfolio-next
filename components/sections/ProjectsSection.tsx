@@ -13,6 +13,12 @@ interface ProjectsSectionProps {
   otherProjects: Project[];
 }
 
+const bg = {
+ reddish: "#e54540AA",
+ bluish: "#131A64AA",
+ greenish: "#115725AA"
+};
+
 function RequestAccessButton({ projectTitle }: { projectTitle: string }) {
   const { setContactRequest } = useContactRequest();
 
@@ -143,7 +149,7 @@ function OtherProjectCard({ project }: { project: Project; }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark-300 via-dark-300/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-        <a className={`py-2 ${project.color} w-full font-bold text-white text-sm`} href={project.liveUrl} target = "_blank" rel = "noopener noreferrer">{project.title}</a>
+        <a className={`py-2 w-full font-bold block text-center text-white text-sm`} style={{ backgroundColor: bg[project.color] }} href={project.liveUrl} target = "_blank" rel = "noopener noreferrer">{project.title}</a>
       </div>
 		</li>
  );

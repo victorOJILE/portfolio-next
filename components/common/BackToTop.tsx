@@ -20,8 +20,7 @@ export default function BackToTop() {
           aria-label="Back to top"
           title="Back to top"
           whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
+          whileTap={{ scale: 0.9 }}>
           <FaChevronUp className="w-5 h-5 mx-auto" />
         </motion.button>
       )}

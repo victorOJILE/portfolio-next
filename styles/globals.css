@@ -161,19 +161,7 @@
   	font-size: 0.75rem;
   	bottom: 0;
   	left: 0;
-  	z-index: 99;
-  }
-  
-  .reddish {
-  	background-color: #e54540AA;
-  }
-  
-  .bluish {
-  	background-color: #131A64AA;
-  }
-  
-  .greenish {
-  	background-color: #115725AA;
+  	z-index: 1;
   }
   
   .custom-scrollbar::-webkit-scrollbar {

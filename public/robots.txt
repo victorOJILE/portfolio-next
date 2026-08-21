@@ -6,4 +6,4 @@ Allow: /
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://victorojile.com/sitemap.xml
+Sitemap: https://victorojile.vercel.app/sitemap.xml
