@@ -48,10 +48,9 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackExternalLink(link.href, link.label)}
-              className="text-white hover:text-primary-400 transition-colors duration-200 transform hover:scale-110"
+              className="text-white hover:text-accent-gold transition-colors duration-200 transform hover:scale-110"
               aria-label={link.label}
-              title={link.label}
-            >
+              title={link.label}>
               <link.icon className="w-6 h-6" />
             </a>
           ))}
@@ -60,7 +59,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="text-center space-y-2">
           <p className="text-sm md:text-base text-gray-300">
-            Designed & Developed by <span className="text-primary-400 font-semibold">Victor Ojile</span>
+            Designed & Developed by <span className="text-accent-gold font-semibold">Victor Ojile</span>
           </p>
           <p className="text-xs md:text-sm text-gray-500">
             &copy; {new Date().getFullYear()} All rights reserved.

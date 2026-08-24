@@ -73,7 +73,7 @@ function ProjectCard({ project }: { project: Project; }) {
 
       {/* Project Info */}
       <div className="p-6">
-        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors">
+        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-accent-gold transition-colors">
           {project.title}
         </h3>
 
@@ -83,7 +83,7 @@ function ProjectCard({ project }: { project: Project; }) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-0.5 text-xs bg-primary-600/20 text-primary-300 rounded-full border border-primary-500/30">
+                className="px-2 py-0.5 text-xs bg-accent-gold/20 text-accent-gold rounded-full border border-accent-gold/30">
                 {tech}
               </span>
             ))}
@@ -176,23 +176,18 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
 
         {/* Main Projects */}
         {mainProjects.length > 0 && (
-          <div className="mb-16">
-            <h3 className="text-3xl font-beauty text-primary-400 mb-8 text-center md:text-left">
-              Main Projects
-            </h3>
-            <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {mainProjects.map((project, index) => <ProjectCard key={project.id} project={project} />)}
-            </ul>
-          </div>
+          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {mainProjects.map((project, index) => <ProjectCard key={project.id} project={project} />)}
+          </ul>
         )}
 
         {/* Other Projects */}
         {otherProjects.length > 0 && (
           <div>
-            <h3 className="text-3xl font-beauty text-secondary-400 mb-8 text-center md:text-left">
+            <h3 className="section-heading">
               Other Projects
             </h3>
-            <ul className="custom-scrollbar scrollbar">
+            <ul className="scrollbar">
               {otherProjects.map((project, index) => <OtherProjectCard key={project.id} project={project} />
               )}
             </ul>

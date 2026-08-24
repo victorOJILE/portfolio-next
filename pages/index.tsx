@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import HeroSection from '@/components/sections/HeroSection';
+import HighlightsSection from '@/components/sections/HighlightsSection';
 import AboutSection from '@/components/sections/AboutSection';
 import SkillsSection from '@/components/sections/SkillsSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
@@ -48,6 +49,7 @@ export default function HomePage({ mainProjects, otherProjects }: HomePageProps)
    </Head>
 
    <HeroSection />
+   <HighlightsSection />
    <ContactRequestProvider>
     <ProjectsSection mainProjects={mainProjects} otherProjects={otherProjects} />
     <AboutSection />

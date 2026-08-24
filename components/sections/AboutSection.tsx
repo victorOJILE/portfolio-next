@@ -2,26 +2,65 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import { FaDownload } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaDownload, FaBolt, FaDatabase, FaLock, FaUserAlt } from 'react-icons/fa';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
 import { trackDownloadCV } from '@/lib/firebase/analytics';
+
+const highlights = [
+  {
+    icon: FaBolt,
+    title: 'Modern Technologies',
+    description: (
+      <>
+        I specialize in <strong className="text-accent-gold">React</strong>,{' '}
+        <strong className="text-accent-gold">Next.js</strong>, and{' '}
+        <strong className="text-accent-gold">TypeScript</strong> to build modern,
+        scalable and maintainable web applications with excellent developer and
+        user experience.
+      </>
+    )
+  },
+  {
+    icon: FaDatabase,
+    title: 'Real-time & Integrations',
+    description: (
+      <>
+        I build systems that handle real-time updates using{' '}
+        <strong className="text-accent-gold">WebSockets</strong> and{' '}
+        <strong className="text-accent-gold">Firebase Realtime Database</strong>,
+        along with third-party integrations that add real value.
+      </>
+    )
+  },
+  {
+    icon: FaLock,
+    title: 'Security & Performance',
+    description: 'I follow industry best practices for secure development, performance optimization and building applications that can handle real traffic.'
+  },
+  {
+    icon: FaUserAlt,
+    title: 'Problem Solving',
+    description: 'I love solving real problems with code and turning ideas into products that people actually use and rely on.'
+  }
+];
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useScrollVisibility(sectionRef);
-  
+
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="section-padding bg-gray-50 relative"
+      className="section-padding relative bg-dark-300 bg-pattern"
       aria-labelledby="about-heading">
       <div className="container-custom">
-        <div className="max-w-4xl mx-auto pt-20 md:pt-24">
-          {/* Section Heading */}
-          <header className={"text-center mb-12 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
-            <h2 className="section-heading text-dark-200">About Me</h2>
+        <div className="max-w-3xl mx-auto pt-20 md:pt-24">
+          <header className={"text-center mb-16 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
+            <h2 className="section-heading">About Me</h2>
           </header>
+
           {/* Profile Image - Positioned absolutely at top */}
           <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-[25%_5%] overflow-hidden border-4 border-gray-300 shadow-xl bg-white">
@@ -34,33 +73,33 @@ export default function AboutSection() {
               />
             </div>
           </div>
-          {/* About Content */}
-          <div className="prose prose-lg">
-            <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
-              Hello! I am <strong>Victor Ojile</strong>, a full-stack web developer, with 4+ years of practical experience,
-              who turns complex problems into clean, fast web applications that businesses actually enjoy using.
-            </p>
 
-            <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
-              I specialize in modern web technologies including <strong>React</strong>, <strong>Next.js</strong>, 
-              and <strong>TypeScript</strong> so your users get fast, reliable interfaces that work on any device.
-            </p>
-            <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
-              My expertise includes developing  systems that handle real-time updates (using WebSockets and Firebase Realtime Database), third-party integrations, high traffic and security.
-            </p>
-
-            <p className="text-dark-200 leading-relaxed mb-6 text-base md:text-lg">
-              I'm committed to writing 
-              clean, maintainable code and following best practices for security and performance optimization.
-            </p>
-
-            <p className="text-dark-200 leading-relaxed mb-8 text-base md:text-lg">
-              Let's build something great — I'm open to freelance projects and full-time roles in modern web development.
-            </p>
-          </div>
+          {/* Icon Highlights Grid */}
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10">
+            {highlights.map((item, index) => (
+              <motion.li
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                className="flex gap-5">
+                <div className="shrink-0 w-12 h-12 rounded-lg border border-accent-gold/40 bg-dark-300 flex items-center justify-center">
+                  <item.icon className="w-5 h-5 text-accent-gold" />
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-white font-bold text-lg md:text-xl mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed text-sm md:text-base">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
 
           {/* Download CV Button */}
-          <div className="text-center">
+          <div className="text-center mt-14">
             <a
               href="/victor_ojile_cv.pdf"
               download="victor_ojile_resume"
