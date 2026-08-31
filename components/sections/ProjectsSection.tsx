@@ -170,13 +170,13 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
         <header className={"text-center mb-16 fade-in-up" + (isVisible ? " visible" : "")}>
           <h2 className="section-heading">Featured Projects</h2>
           <p className="text-gray-400 mt-4 text-lg">
-            A selection of my best work showcasing diverse skills and technologies
+            A selection of my best work showcasing diverse skills and technologies.
           </p>
         </header>
 
         {/* Main Projects */}
         {mainProjects.length > 0 && (
-          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap:16 mb-16 max-w-4xl mx-auto">
             {mainProjects.map((project, index) => <ProjectCard key={project.id} project={project} />)}
           </ul>
         )}

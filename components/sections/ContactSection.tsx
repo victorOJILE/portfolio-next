@@ -114,12 +114,10 @@ export default function ContactSection() {
         </header>
 
         {/* Intro Text */}
-        <div className={"mb-8 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
-          <p className="text-gray-300 text-lg md:text-xl font-crimson text-center">
-            I am interested in freelance opportunities. However, if you have other requests or
-            questions, don't hesitate to use the form.
-          </p>
-        </div>
+        <p className={"max-w-2xl text-gray-300 text-lg md:text-xl font-crimson text-center mb-8 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
+          I am interested in freelance opportunities. However, if you have other requests or
+          questions, don't hesitate to use the form.
+        </p>
 
         {/* Contact Form */}
         <div className={"glass-card p-6 md:p-8 fade-in-up transition-delay-400" + (isVisible ? " visible" : "")}>

@@ -38,7 +38,7 @@ export default function HighlightsSection() {
     <section
       ref={sectionRef}
       id="highlights"
-      className="bg-dark-300 bg-pattern pb-24"
+      className="bg-dark-300 bg-pattern pt-24 md:pt-12 pb-24"
       aria-labelledby="highlights-heading">
       <div className="container-custom">
         {/* Feature Grid */}
