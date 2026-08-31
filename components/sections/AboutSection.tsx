@@ -101,7 +101,7 @@ export default function AboutSection() {
 
           {/* CTA Banner */}
           <div
-            className="flex flex-col md:flex-row items-center justify-between gap-6 mt-14 mx-auto rounded-xl border border-accent-gold/30 bg-gradient-to-r from-accent-gold/60 via-dark-300 to-dark-300 p-6 md:p-8">
+            className="flex flex-col md:flex-row items-center justify-between gap-6 mt-14 mx-auto rounded-xl border border-accent-gold/30 bg-dark-300 p-6 md:p-8">
             <div className="flex md:items-center gap-4">
               <div className="shrink-0 w-12 h-12 rounded-lg border border-accent-gold/40 bg-accent-gold/10 flex items-center justify-center">
                 <FaPaperPlane className="w-5 h-5 text-accent-gold" />

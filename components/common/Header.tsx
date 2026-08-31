@@ -38,7 +38,7 @@ export default function Header() {
      </Link>
 
      {/* Desktop Navigation */}
-     <div>
+     <div className="flex items-center justify-between">
       <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
        {navLinks.map((link) => (
        <li key={link.href}>
@@ -55,9 +55,9 @@ export default function Header() {
        href="/victor_ojile_cv.pdf"
        download="victor_ojile_resume"
        onClick={trackDownloadCV}
-       className="rounded-xl btn-primary inline-flex items-center gap-3 mx-3"
+       className="rounded-full btn-primary inline-flex items-center gap-3 mx-3 py-2 hidden md:inline-block"
        aria-label="Download Victor Ojile's full CV">
-       <FaDownload className="text-2xl" />
+       <FaDownload className="text-xl" />
        <strong>Download CV</strong>
       </a>
      </div>

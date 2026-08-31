@@ -38,11 +38,11 @@ export default function HighlightsSection() {
     <section
       ref={sectionRef}
       id="highlights"
-      className="section-padding relative bg-dark-300 bg-pattern"
+      className="bg-dark-300 bg-pattern pb-24"
       aria-labelledby="highlights-heading">
       <div className="container-custom">
         {/* Feature Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}

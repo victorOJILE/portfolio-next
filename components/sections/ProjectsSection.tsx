@@ -25,7 +25,7 @@ function RequestAccessButton({ projectTitle }: { projectTitle: string }) {
   const handleRequestAccess = async () => {
     const confirmed = window.confirm(
       `Requesting access to ${projectTitle}?\n\n` +
-      `Please fill out the contact form below.\n` +
+      `Please fill out the contact form below.\n\n` +
       `Be sure to include your GitHub username so I can grant access.`
     );
   
