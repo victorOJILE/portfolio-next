@@ -7,7 +7,8 @@ import Link from 'next/link';
 export default function HeroSection() {
   return (
     <section
-      className="min-h-screen bg-pattern flex items-center justify-center relative overflow-hidden pt-20"
+      className="bg-pattern flex items-center justify-center relative overflow-hidden pt-20"
+      style={{ height: clamp("600px", "95dvh", "900px") }}
       aria-label="Main Introduction">
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center px-4">
@@ -16,7 +17,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-beauty text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-red-50 text-gradient text-shadow-glow mb-6">
+            className="font-beauty text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-gold-50 text-gradient text-shadow-glow mb-6">
             CODING WITH PASSION,
             <br />
             CRAFTING WITH PURPOSE
@@ -27,8 +28,8 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-2xl text-red-400 font-crimson mb-12">
-            <strong>Quality, Security & Maintainability.</strong>
+            className="text-lg text-gold-50 md:text-2xl font-crimson mb-12">
+            <strong className="text-accent-gold">Full Stack Developer, </strong> Building Modern Web Experiences
           </motion.p>
 
           {/* CTA Button */}

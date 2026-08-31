@@ -56,8 +56,8 @@ export default function AboutSection() {
       className="section-padding relative bg-dark-300 bg-pattern"
       aria-labelledby="about-heading">
       <div className="container-custom">
-        <div className="max-w-3xl mx-auto pt-20 md:pt-24">
-          <header className={"text-center mb-16 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
+        <div className="max-w-4xl mx-auto pt-20 md:pt-24">
+          <header className={"text-center mb-8 md:mb-16 fade-in-up transition-delay-200" + (isVisible ? " visible" : "")}>
             <h2 className="section-heading">About Me</h2>
           </header>
 
@@ -98,8 +98,22 @@ export default function AboutSection() {
             ))}
           </ul>
 
-          {/* Download CV Button */}
-          <div className="text-center mt-14">
+          {/* CTA Banner */}
+          <div
+            className="flex flex-col md:flex-row items-center justify-between gap-6 mt-14 mx-auto rounded-xl border border-accent-gold/30 bg-gradient-to-r from-accent-gold/60 via-dark-300 to-dark-300 p-6 md:p-8">
+            <div className="flex md:items-center gap-4">
+              <div className="shrink-0 w-12 h-12 rounded-lg border border-accent-gold/40 bg-accent-gold/10 flex items-center justify-center">
+                <FaPaperPlane className="w-5 h-5 text-accent-gold" />
+              </div>
+              <div>
+                <h3 className="text-white font-bold text-lg md:text-xl mb-1">
+                  Let's build something great together
+                </h3>
+                <p className="text-gray-400 text-sm md:text-base">
+                  I'm open to freelance projects, collaboration and full-time opportunities.
+                </p>
+              </div>
+            </div>
             <a
               href="/victor_ojile_cv.pdf"
               download="victor_ojile_resume"

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FaDownload } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBackToTop } from '@/hooks/useBackToTop';
 
@@ -36,36 +37,53 @@ export default function Header() {
      </Link>
 
      {/* Desktop Navigation */}
-     <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
-      {navLinks.map((link) => (
-      <li key={link.href}>
-       <Link
-        href={link.href}
-        className="text-sm lg:text-base font-bold text-gray-300 hover:text-white transition-colors duration-200 link-hover">
-        {link.label}
-       </Link>
-      </li>
-      ))}
-     </ul>
-
+     <div>
+      <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
+       {navLinks.map((link) => (
+       <li key={link.href}>
+        <Link
+         href={link.href}
+         className="text-sm lg:text-base font-bold text-gray-300 hover:text-white transition-colors duration-200 link-hover">
+         {link.label}
+        </Link>
+       </li>
+       ))}
+      </ul>
+      
+      <a
+       href="/victor_ojile_cv.pdf"
+       download="victor_ojile_resume"
+       onClick={trackDownloadCV}
+       className="rounded-xl btn-primary inline-flex items-center gap-3 mx-3"
+       aria-label="Download Victor Ojile's full CV">
+       <FaDownload className="text-2xl" />
+       <strong>Download CV</strong>
+      </a>
+     </div>
      {/* Mobile Menu Button */}
      <button
-      onClick={() => setIsMenuOpen(menuOpen => !menuOpen)}
-      className="md:hidden p-2 border border-gray-600 rounded"
-      aria-label="Toggle menu"
-      aria-expanded={isMenuOpen}
-      aria-controls="mobile-menu">
-      <div className="w-6 flex flex-col justify-between h-4">
-       <span
-        className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[11px] bg-red-500' : ''}`}
-       />
-       <span
-        className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}
-       />
-       <span
-        className={`block h-0.5 bg-gray-300 rounded transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[11px] bg-red-500' : ''}`}
-       />
-      </div>
+       onClick={() => setIsMenuOpen(menuOpen => !menuOpen)}
+       className="md:hidden p-2 border border-gray-600 rounded"
+       aria-label="Toggle menu"
+       aria-expanded={isMenuOpen}
+       aria-controls="mobile-menu">
+       <div className="w-6 h-4 relative">
+         <span
+           className={`absolute left-0 top-0 w-6 h-0.5 bg-gray-300 rounded transition-all duration-300 origin-center ${
+             isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45 bg-red-500' : ''
+           }`}
+         />
+         <span
+           className={`absolute left-0 top-1/2 -translate-y-1/2 w-6 h-0.5 bg-gray-300 rounded transition-all duration-300 ${
+             isMenuOpen ? 'opacity-0' : ''
+           }`}
+         />
+         <span
+           className={`absolute left-0 bottom-0 w-6 h-0.5 bg-gray-300 rounded transition-all duration-300 origin-center ${
+             isMenuOpen ? 'bottom-1/2 translate-y-1/2 -rotate-45 bg-red-500' : ''
+           }`}
+         />
+       </div>
      </button>
     </div>
 
