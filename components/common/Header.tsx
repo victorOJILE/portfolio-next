@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaDownload } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackDownloadCV } from '@/lib/firebase/analytics';
 import { useBackToTop } from '@/hooks/useBackToTop';
 
 const navLinks = [

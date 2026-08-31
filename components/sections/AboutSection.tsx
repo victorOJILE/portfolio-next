@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { FaDownload, FaBolt, FaDatabase, FaLock, FaUserAlt } from 'react-icons/fa';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
 import { trackDownloadCV } from '@/lib/firebase/analytics';
+import { FaPaperPlane } from 'react-icons/fa';
 
 const highlights = [
   {

@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
-import { FaCode, FaRocket, FaShieldAlt, FaPaperPlane } from 'react-icons/fa';
+import { FaCode, FaRocket, FaShieldAlt } from 'react-icons/fa';
 import { MdDevices } from 'react-icons/md';
 
 const features = [

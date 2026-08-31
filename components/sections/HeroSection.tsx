@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section
       className="bg-pattern flex items-center justify-center relative overflow-hidden pt-20"
-      style={{ height: clamp("600px", "95dvh", "900px") }}
+      style={{ height: "clamp(600px, 95dvh, 900px)" }}
       aria-label="Main Introduction">
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center px-4">
