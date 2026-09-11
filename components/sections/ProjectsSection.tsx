@@ -138,6 +138,7 @@ function ProjectCard({ project }: { project: Project; }) {
 
 function OtherProjectCard({ project }: { project: Project; }) {
  
+ 
   return (
     <li className="inline-block relative m-2 md:m-4">
 	    <div className="h-64 md:h-72 overflow-hidden">
@@ -183,8 +184,8 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
 
         {/* Other Projects */}
         {otherProjects.length > 0 && (
-          <div>
-            <h3 className="section-heading">
+          <div className="max-w-2xl lg:max-w-4xl mx-auto">
+            <h3 className="section-heading text-center">
               Other Projects
             </h3>
             <ul className="scrollbar">
