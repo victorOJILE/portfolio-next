@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { FaDownload, FaBolt, FaDatabase, FaLock, FaUserAlt } from 'react-icons/fa';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
 import { trackDownloadCV } from '@/lib/firebase/analytics';
+import { FaPaperPlane } from 'react-icons/fa';
 
 const highlights = [
   {
@@ -100,19 +101,14 @@ export default function AboutSection() {
 
           {/* CTA Banner */}
           <div
-            className="flex flex-col md:flex-row items-center justify-between gap-6 mt-14 mx-auto rounded-xl border border-accent-gold/30 bg-gradient-to-r from-accent-gold/60 via-dark-300 to-dark-300 p-6 md:p-8">
-            <div className="flex md:items-center gap-4">
-              <div className="shrink-0 w-12 h-12 rounded-lg border border-accent-gold/40 bg-accent-gold/10 flex items-center justify-center">
-                <FaPaperPlane className="w-5 h-5 text-accent-gold" />
-              </div>
-              <div>
-                <h3 className="text-white font-bold text-lg md:text-xl mb-1">
-                  Let's build something great together
-                </h3>
-                <p className="text-gray-400 text-sm md:text-base">
-                  I'm open to freelance projects, collaboration and full-time opportunities.
-                </p>
-              </div>
+            className="flex flex-col md:flex-row items-center justify-between gap-6 mt-14 mx-auto rounded-xl border border-accent-gold/30 bg-dark-300 p-6 md:p-8">
+            <div className="text-center md:text-left">
+              <h3 className="text-white font-bold text-lg md:text-xl mb-1">
+                Let's build something great together
+              </h3>
+              <p className="text-gray-400 text-sm md:text-base">
+                I'm open to freelance projects, collaboration and full-time opportunities.
+              </p>
             </div>
             <a
               href="/victor_ojile_cv.pdf"

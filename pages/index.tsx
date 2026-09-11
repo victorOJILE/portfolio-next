@@ -47,15 +47,17 @@ export default function HomePage({ mainProjects, otherProjects }: HomePageProps)
     <meta name="twitter:description" content="Full Stack Web Developer building fast, reliable web products, Specialized in the JavaScript Ecosystem and Modern Web Technologies." />
     <meta name="twitter:image" content="https://victorojile.com/images/og-image.jpg" />
    </Head>
-
-   <HeroSection />
-   <HighlightsSection />
-   <ContactRequestProvider>
-    <ProjectsSection mainProjects={mainProjects} otherProjects={otherProjects} />
-    <AboutSection />
-    <SkillsSection />
-    <ContactSection />
-   </ContactRequestProvider>
+   
+   <body>
+    <HeroSection />
+    <HighlightsSection />
+    <ContactRequestProvider>
+     <ProjectsSection mainProjects={mainProjects} otherProjects={otherProjects} />
+     <AboutSection />
+     <SkillsSection />
+     <ContactSection />
+    </ContactRequestProvider>
+   </body>
   </>
  );
 }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaDownload } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackDownloadCV } from '@/lib/firebase/analytics';
 import { useBackToTop } from '@/hooks/useBackToTop';
 
 const navLinks = [
@@ -37,7 +38,7 @@ export default function Header() {
      </Link>
 
      {/* Desktop Navigation */}
-     <div>
+     <div className="flex items-center justify-between">
       <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
        {navLinks.map((link) => (
        <li key={link.href}>
@@ -54,9 +55,9 @@ export default function Header() {
        href="/victor_ojile_cv.pdf"
        download="victor_ojile_resume"
        onClick={trackDownloadCV}
-       className="rounded-xl btn-primary inline-flex items-center gap-3 mx-3"
+       className="rounded-xl btn-primary hidden md:inline-flex items-center gap-3 mx-6 py-2"
        aria-label="Download Victor Ojile's full CV">
-       <FaDownload className="text-2xl" />
+       <FaDownload className="text-xl" />
        <strong>Download CV</strong>
       </a>
      </div>
