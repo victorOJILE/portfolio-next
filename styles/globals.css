@@ -62,11 +62,11 @@
   
   /* Container Utilities */
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-4xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   
   .section-padding {
-    @apply py-24 md:py-32;
+    @apply py-24 md:py-32 md:pb-48;
   }
   
   /* Background Patterns */

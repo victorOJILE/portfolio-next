@@ -57,7 +57,7 @@ export default function Header() {
        onClick={trackDownloadCV}
        className="rounded-xl btn-primary hidden md:inline-flex items-center gap-3 mx-6 py-2"
        aria-label="Download Victor Ojile's full CV">
-       <FaDownload className="text-xl" />
+       <FaDownload className="text-lg" />
        <strong>Download CV</strong>
       </a>
      </div>

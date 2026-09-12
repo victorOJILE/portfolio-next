@@ -177,14 +177,14 @@ export default function ProjectsSection({ mainProjects, otherProjects }: Project
 
         {/* Main Projects */}
         {mainProjects.length > 0 && (
-          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap:16 mb-16 max-w-4xl mx-auto">
+          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap:32 mb-16 md:mb-32 max-w-4xl mx-auto">
             {mainProjects.map((project, index) => <ProjectCard key={project.id} project={project} />)}
           </ul>
         )}
 
         {/* Other Projects */}
         {otherProjects.length > 0 && (
-          <div className="max-w-2xl lg:max-w-4xl mx-auto">
+          <div>
             <h3 className="section-heading text-center">
               Other Projects
             </h3>
