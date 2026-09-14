@@ -33,6 +33,18 @@ function checkRateLimit(ip: string): boolean {
  return true;
 }
 
+function isValidEmail(email: string): boolean {
+ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidName(name: string): boolean {
+ return name.trim().length >= 2 && name.trim().length <= 30 && /^[a-zA-Z\s'-]+$/.test(name.trim());
+}
+
+function isValidText(text: string) {
+ return text.trim().length >= 5 && /^[a-zA-Z\s'-]+$/.test(text.trim());
+}
+
 export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse<ResponseData>
@@ -52,7 +64,7 @@ export default async function handler(
  if (!checkRateLimit(clientIp)) {
   return res.status(429).json({
    success: false,
-   message: 'Too many requests. Please try again later.',
+   message: 'Too many requests. Please try again later.'
   });
  }
  
@@ -60,22 +72,28 @@ export default async function handler(
   const { fullName, email, subject, message }: ContactFormData = req.body;
   
   // Validation
-  if (!email || !message) {
+  if (!email || !message || !fullName) {
    return res.status(400).json({
     success: false,
-    message: 'Email and message are required',
+    message: 'Bad Request'
    });
   }
   
-  // Email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
+  let err = false;
+  
+  if (!isValidName(fullName)) err = true;
+  if(!email.trim() || !isValidEmail(email)) err = true;
+  
+  if(subject != "" && !isValidText(subject)) err = true;
+  if(!isValidText(message)) err = true;
+  
+  if(err) {
    return res.status(400).json({
     success: false,
-    message: 'Invalid email format'
+    message: 'Bad Request'
    });
   }
-  
+    
   // Create transporter
   const transporter = nodemailer.createTransport({
    service: 'gmail',
