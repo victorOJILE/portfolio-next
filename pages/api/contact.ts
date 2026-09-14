@@ -41,8 +41,25 @@ function isValidName(name: string): boolean {
  return name.trim().length >= 2 && name.trim().length <= 30 && /^[a-zA-Z\s'-]+$/.test(name.trim());
 }
 
-function isValidText(text: string) {
- return text.trim().length >= 5 && /^[a-zA-Z\s'-]+$/.test(text.trim());
+function isValidSubject(text: string) {
+ // No newlines allowed here — subject goes straight into an email header,
+ // and a newline could enable header injection (e.g. smuggled Bcc:).
+ return text.trim().length >= 5 && /^[\p{L}\p{N}\s.,!?'"()\-:;@#&/]+$/u.test(text.trim());
+}
+
+function isValidMessage(text: string) {
+ return text.trim().length >= 5 && /^[\p{L}\p{N}\s.,!?'"()\-:;@#&/\n]+$/u.test(text.trim());
+}
+
+function escapeHtml(text: string): string {
+ // Defense in depth: even though the regexes above already block <, >, etc.,
+ // never trust a single layer when interpolating user input into HTML.
+ return text
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
 }
 
 export default async function handler(
@@ -84,8 +101,8 @@ export default async function handler(
   if (!isValidName(fullName)) err = true;
   if(!email.trim() || !isValidEmail(email)) err = true;
   
-  if(subject != "" && !isValidText(subject)) err = true;
-  if(!isValidText(message)) err = true;
+  if(subject != "" && !isValidSubject(subject)) err = true;
+  if(!isValidMessage(message)) err = true;
   
   if(err) {
    return res.status(400).json({
@@ -132,7 +149,7 @@ export default async function handler(
      
      <!-- Visitor Info Card -->
      <section style="background-color: #ffffff; padding: 20px; color: #0F1622; font-size: 20px; font-weight: bold">
-      ${fullName || "NO NAME"}
+      ${escapeHtml(fullName) || "NO NAME"}
      </section>
      
      <!-- Message Section -->
@@ -142,7 +159,7 @@ export default async function handler(
       </h2>
       <div role="presentation" style="border-left: 4px solid #818000; background-color: #FEFFF5; padding: 10px 25px; border-radius: 0 8px 8px 0;">
        <p style="color: #333333; font-size: 16px; line-height: 1.7; font-style: italic;">
-        "${message}"
+        "${escapeHtml(message)}"
        </p>
       </div>
      </section>
@@ -217,7 +234,7 @@ export default async function handler(
        Message Received
       </h2>
       <p style="color: #666666; font-size: 16px; line-height: 1.6;padding: 0px 20px;">
-       Thanks for reaching out, ${fullName}. I've got your message and I'm already looking forward to reading&nbsp;it.
+       Thanks for reaching out, ${escapeHtml(fullName)}. I've got your message and I'm already looking forward to reading&nbsp;it.
       </p>
      </section>
      
@@ -259,7 +276,7 @@ export default async function handler(
         Your message
        </h2>
        <p style="color: #333333; font-size: 15px; line-height: 1.6; font-style: italic; padding-bottom: 10px;">
-        "${message}"
+        "${escapeHtml(message)}"
        </p>
        <p style="color: #999999; font-size: 12px;">
         — Sent from victorojile.vercel.app

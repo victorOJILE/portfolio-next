@@ -7,15 +7,15 @@ import { trackContactFormSubmit } from '@/lib/firebase/analytics';
 import { FaPaperPlane, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 
 interface FormData {
-  fullName: string;
-  email: string;
-  subject: string;
-  message: string;
+ fullName: string;
+ email: string;
+ subject: string;
+ message: string;
 }
 
 interface FormStatus {
-  type: 'idle' | 'loading' | 'success' | 'error';
-  message: string;
+ type: 'idle' | 'loading' | 'success' | 'error';
+ message: string;
 }
 
 function isValidEmail(email: string): boolean {
@@ -26,107 +26,110 @@ function isValidName(name: string): boolean {
  return name.trim().length >= 2 && name.trim().length <= 30 && /^[a-zA-Z\s'-]+$/.test(name.trim());
 }
 
-function isValidText(text: string) {
- return text.trim().length >= 5 && /^[a-zA-Z\s'-]+$/.test(text.trim());
+function isValidSubject(text: string) {
+ return text.trim().length >= 5 && /^[\p{L}\p{N}\s.,!?'"()\-:;@#&/]+$/u.test(text.trim());
+}
+
+function isValidMessage(text: string) {
+ return text.trim().length >= 5 && /^[\p{L}\p{N}\s.,!?'"()\-:;@#&/\n]+$/u.test(text.trim());
 }
 
 export default function ContactSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isVisible = useScrollVisibility(sectionRef);
-  const { requestedSubject, requestedMessage } = useContactRequest();
-  
-  const [formData, setFormData] = useState<FormData>({
-    fullName: '',
-    email: '',
-    subject: requestedSubject,
-    message: requestedMessage
+ const sectionRef = useRef<HTMLElement>(null);
+ const isVisible = useScrollVisibility(sectionRef);
+ const { requestedSubject, requestedMessage } = useContactRequest();
+ 
+ const [formData, setFormData] = useState<FormData>({
+  fullName: '',
+  email: '',
+  subject: requestedSubject,
+  message: requestedMessage
+ });
+ 
+ const [status, setStatus] = useState<FormStatus>({ type: 'idle', message: '' });
+ 
+ useEffect(() => {
+  if (requestedSubject || requestedMessage) {
+   setFormData((prev) => ({
+    ...prev,
+    subject: requestedSubject || prev.subject,
+    message: requestedMessage || prev.message
+   }));
+  }
+ }, [requestedSubject, requestedMessage]);
+ 
+ const handleChange = (
+  e: React.ChangeEvent < HTMLInputElement | HTMLTextAreaElement >
+ ) => {
+  setFormData({
+   ...formData,
+   [e.target.name]: e.target.value,
   });
-
-  const [status, setStatus] = useState<FormStatus>({ type: 'idle', message: '' });
+ };
+ 
+ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
   
-  useEffect(() => {
-    if (requestedSubject || requestedMessage) {
-      setFormData((prev) => ({
-        ...prev,
-        subject: requestedSubject || prev.subject,
-        message: requestedMessage || prev.message
-      }));
-    }
-  }, [requestedSubject, requestedMessage]);
+  let err = [];
   
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    let err = [];
-    
-    const fullName = formData.fullName;
-    if (!fullName.trim()) err.push("Please enter your full name.");
-    if (fullName.trim().length < 2) err.push("Name must be at least 2 characters.");
-    if (!isValidName(fullName)) err.push("Name should only contain letters.");
-    if(!fullName.trim().match("\s")[0]) err.push("Please, add your last name.");
-    
-    if(!formData.email.trim() || !isValidEmail(formData.email)) err.push("Please enter a valid email address");
-    
-    if(!isValidText(formData.subject) || !isValidText(formData.message)) err.push("Please, add a valid subject and message!\n\nShould only contain letters.");
-    
-    if(err[0]) return alert(err[0]);
+  const fullName = formData.fullName;
+  if (!fullName.trim()) err.push("Please enter your full name.");
+  if (fullName.trim().length < 3) err.push("Name must be at least 3 characters.");
+  if (!isValidName(fullName)) err.push("Name should only contain letters.");
+  
+  if (!formData.email.trim() || !isValidEmail(formData.email)) err.push("Please enter a valid email address");
+  
+  if (!isValidSubject(formData.subject) || !isValidMessage(formData.message)) err.push("Please, add a valid subject and message!\n\nShould only contain letters, numbers, and basic punctuation.");
+  
+  if (err[0]) return alert(err[0]);
+  
+  setStatus({ type: 'loading', message: 'Sending...' });
+  
+  try {
+   const response = await fetch('/api/contact', {
+    method: 'POST',
+    headers: {
+     'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+   });
    
-    setStatus({ type: 'loading', message: 'Sending...' });
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        trackContactFormSubmit();
-        setStatus({
-          type: 'success',
-          message: data.message || 'Message sent successfully!',
-        });
-        // Reset form
-        setFormData({
-          fullName: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        
-        // Clear success message after 5 seconds
-        setTimeout(() => {
-          setStatus({ type: 'idle', message: '' });
-        }, 5000);
-      } else {
-        setStatus({
-          type: 'error',
-          message: data.message || 'Failed to send message. Please try again.',
-        });
-      }
-    } catch (error) {
-      setStatus({
-        type: 'error',
-        message: 'An error occurred. Please try again later.'
-      });
-    }
-  };
-
-  return (
-    <section
+   const data = await response.json();
+   
+   if (response.ok) {
+    trackContactFormSubmit();
+    setStatus({
+     type: 'success',
+     message: data.message || 'Message sent successfully!',
+    });
+    // Reset form
+    setFormData({
+     fullName: '',
+     email: '',
+     subject: '',
+     message: ''
+    });
+    
+    // Clear success message after 5 seconds
+    setTimeout(() => {
+     setStatus({ type: 'idle', message: '' });
+    }, 5000);
+   } else {
+    setStatus({
+     type: 'error',
+     message: data.message || 'Failed to send message. Please try again.',
+    });
+   }
+  } catch (error) {
+   setStatus({
+    type: 'error',
+    message: 'An error occurred. Please try again later.'
+   });
+  }
+ };
+ 
+ return (
+  <section
       ref={sectionRef}
       id="contact"
       className="section-padding bg-dark-300 bg-pattern"
@@ -250,5 +253,5 @@ export default function ContactSection() {
         </div>
       </div>
     </section>
-  );
+ );
 }
