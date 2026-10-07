@@ -36,8 +36,22 @@ export const trackContactFormSubmit = () => {
   });
 };
 
-export const trackDownloadCV = () => {
+export const trackViewCV = (source?: string) => {
+  trackEvent('view_cv', {
+    source,
+    timestamp: new Date().toISOString(),
+  });
+};
+
+export const trackCopyCVLink = () => {
+  trackEvent('copy_cv_link', {
+    timestamp: new Date().toISOString(),
+  });
+};
+
+export const trackDownloadCV = (source?: string) => {
   trackEvent('download_cv', {
+    source,
     timestamp: new Date().toISOString(),
   });
 };

@@ -5,6 +5,7 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import SocialSidebar from '../components/common/SocialSidebar';
 import BackToTop from '../components/common/BackToTop';
+import CVModalProvider from '../components/contexts/CVModalContext';
 
 const openSans = localFont({
   src: '../public/fonts/OpenSans-Regular.ttf',
@@ -29,13 +30,15 @@ const crimson = localFont({
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className={`${openSans.variable} ${beauty.variable} ${crimson.variable}`}>
-      <Header />
-      <SocialSidebar />
-      <main>
-        <Component {...pageProps} />
-      </main>
-      <Footer />
-      <BackToTop />
+      <CVModalProvider>
+        <Header />
+        <SocialSidebar />
+        <main>
+          <Component {...pageProps} />
+        </main>
+        <Footer />
+        <BackToTop />
+      </CVModalProvider>
     </div>
   );
 }

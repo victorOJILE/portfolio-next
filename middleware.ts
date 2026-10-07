@@ -1,9 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-const BASE_URL = process?.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : process.env.BASE_URL;
-
-const ALLOWED_ORIGINS = [process.env.NEXT_PUBLIC_SITE_URL ?? BASE_URL ?? "http://localhost:3000"];
-
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
@@ -25,7 +21,7 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith("/api/")) {
     const origin = request.headers.get("origin");
-    if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    if (origin && origin !== request.nextUrl.origin) {
       return NextResponse.json({ error: "Origin not allowed." }, { status: 403 });
     }
   }

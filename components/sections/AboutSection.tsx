@@ -3,9 +3,9 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FaDownload, FaBolt, FaDatabase, FaLock, FaUserAlt } from 'react-icons/fa';
+import { FaEye, FaBolt, FaDatabase, FaLock, FaUserAlt } from 'react-icons/fa';
 import { useScrollVisibility } from '@/hooks/useScrollVisibility';
-import { trackDownloadCV } from '@/lib/firebase/analytics';
+import { useCVModal } from '@/components/contexts/CVModalContext';
 import { FaPaperPlane } from 'react-icons/fa';
 
 const highlights = [
@@ -49,6 +49,7 @@ const highlights = [
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useScrollVisibility(sectionRef);
+  const { openCV } = useCVModal();
 
   return (
     <section
@@ -110,15 +111,14 @@ export default function AboutSection() {
                 I'm open to freelance projects, collaboration and full-time opportunities.
               </p>
             </div>
-            <a
-              href="/victor_ojile_cv.pdf"
-              download="victor_ojile_resume"
-              onClick={trackDownloadCV}
+            <button
+              type="button"
+              onClick={() => openCV('about')}
               className="btn-primary inline-flex items-center gap-3"
-              aria-label="Download Victor Ojile's full CV">
-              <FaDownload className="text-2xl" />
-              <strong>Download CV</strong>
-            </a>
+              aria-label="View Victor Ojile's full CV">
+              <FaEye className="text-2xl" />
+              <strong>View CV</strong>
+            </button>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaDownload } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import { trackDownloadCV } from '@/lib/firebase/analytics';
+import { useCVModal } from '@/components/contexts/CVModalContext';
 import { useBackToTop } from '@/hooks/useBackToTop';
 
 const navLinks = [
@@ -19,6 +19,7 @@ const navLinks = [
 export default function Header() {
  const [isMenuOpen, setIsMenuOpen] = useState(false);
  const { isVisible: isScrolled } = useBackToTop(50);
+ const { openCV } = useCVModal();
  
  return (
   <header
@@ -51,15 +52,14 @@ export default function Header() {
        ))}
       </ul>
       
-      <a
-       href="/victor_ojile_cv.pdf"
-       download="victor_ojile_resume"
-       onClick={trackDownloadCV}
+      <button
+       type="button"
+       onClick={() => openCV('header')}
        className="rounded-xl btn-primary hidden md:inline-flex items-center gap-3 mx-6 py-2"
-       aria-label="Download Victor Ojile's full CV">
+       aria-label="View Victor Ojile's full CV">
        <FaDownload className="text-lg" />
-       <strong>Download CV</strong>
-      </a>
+       <strong>View CV</strong>
+      </button>
      </div>
      {/* Mobile Menu Button */}
      <button
@@ -113,6 +113,21 @@ export default function Header() {
                     </Link>
                   </motion.li>
                 ))}
+                <motion.li
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.3 }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      openCV('mobile_menu');
+                    }}
+                    className="flex w-full items-center gap-3 px-4 py-3 text-left font-bold text-accent-gold hover:bg-white/10 transition-colors duration-200">
+                    <FaDownload />
+                    VIEW CV
+                  </button>
+                </motion.li>
               </ul>
             </motion.div>
           )}
