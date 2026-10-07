@@ -11,10 +11,9 @@ import {
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+// Self-hosted copy of the pdf.js worker, created by scripts/copy-pdf-worker.js.
+// (Resolving it through webpack with `new URL(..., import.meta.url)` fails the Next.js build.)
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
 
 const MIN_SCALE = 0.5;
 const MAX_SCALE = 2.5;
